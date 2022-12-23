@@ -61,36 +61,6 @@ class Laddie(ModelConstants):
         #Physical parameters
         ModelConstants.__init__(self)
 
-    def compute(self, days=12, savename=None,restartfile=None):
-        """Run the model"""
-        self.restartfile = restartfile
-        self.days = days
-        
-        #Preprocessing
-        pp.create_mask(self)
-        pp.create_grid(self)
-        pp.initialize_vars(self)
-
-        self.nt = int(self.days*24*3600/self.dt)+1    # Number of time steps
-        self.tend = self.tstart+self.days
-        self.time = np.linspace(self.tstart,self.tend,self.nt)  # Time in days
-
-        #Integration
-        for self.t in range(self.nt):
-            it.updatevars(self)
-            it.integrate(self)
-            it.timefilter(self)
-            it.cutforstability(self)     
-
-            st.savefields(self, savename)
-            st.saverestart(self)
-            st.printdiags(self)
-                
-        print('-----------------------------')
-        print(f'Run completed')
-        
-        return self.ds
-
     def compute2(self, days=12, prescribed_geom_ds=None, savename=None,restartfile=None):
 
         if self.opt == 0:   # run with steady input
