@@ -3,12 +3,8 @@
 Structure of this repository is as follows:
 
 - 'data' contains input geometry data of experiments from ISOMIP or BedMachine data for example
-  - 'preprocess_input.ipynb' makes sure the input files have the right format
-  - ocean3.nc
-  - ocean4.nc
-  - BedMachine.nc
-  - Crosson-Dotson.nc
-  - Pine-Island.nc
+  - '0_Generate_singleshelf.ipynb' generates input files of single shelves, also with variable geometry based on Paolo et al. 2022 thinning rates
+  - '0_Prep_ISOMIPgeoms.ipynb' makes sure the ISOMIP input files have the right format
   
 - 'experiments'
   - 'List_experiments.md' contains different names of experiments and short description of each.
@@ -16,10 +12,9 @@ Structure of this repository is as follows:
     - 'Experiment_X' folder contains specific experiment config file and output
     
 - 'analysis'
-  - post-process.py
+  - post-process.ipynb
   - create_anims.ipynb
   - create_plots.ipynb
   - results
-    - 'Experiment_X'
-      - animations
-      - plots
+    - animations
+    - plots
