@@ -13,6 +13,8 @@ class Geometry(ModelConstants):
         self.dx = self.ds.x[1]-self.ds.x[0]
         self.dy = self.ds.y[1]-self.ds.y[0]
 
+        self.res = (self.ds.x[1]-self.ds.x[0]).values/1000
+
         if self.dx<0:
             print('inverting x-coordinates')
             self.ds = self.ds.reindex(x=list(reversed(self.ds.x)))
@@ -30,6 +32,7 @@ class Geometry(ModelConstants):
         self.ds['bed'] = self.ds.bed.astype('float64')
 
         #Calving criterium
+        ''' add if statement here or move to preprocess together with correctisf? '''
         self.ds['draft'][:] = np.where(np.logical_and(self.ds.mask==3,self.ds.draft>-90),0,self.ds.draft)
         self.ds['mask'][:] = np.where(np.logical_and(self.ds.mask==3,self.ds.draft>-90),0,self.ds.mask)
 
